@@ -1,0 +1,23 @@
+Equipe da biblioteca  - gerenciar eBook
+Equipe da biblioteca  - cadastrar bibliotecário
+Equipe da biblioteca  - cadastrar aluno
+Equipe da biblioteca  - gerenciar editora
+Equipe da biblioteca  - gerenciar categoria
+Equipe da biblioteca  - cadastrar disciplina
+ 
+Aluno - adicionar eBook a estante pessoal
+Aluno - remover eBook a estante pessoal
+
+sistema de gestão de eBooks - remover eBook do catálogo 
+sistema de gestão de eBooks - notificar sistema de estatísticas 
+
+bibliotecários - gerar relatório de eBook por estante de aluno
+
+usuário - gerenciar login
+
+Equipe da biblioteca(pai) -> bibliotecário(filho)
+
+<Include> - verificar número de acessos simultâneos 
+<Include> - verificar licença do eBooks 
+<Include> - verificar quantidade de eBooks na estante
+<Include> - verificar se existe o determinado eBooks existe em pelo menos 3 estantes
