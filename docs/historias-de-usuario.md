@@ -11,3 +11,6 @@ Como aluno, eu quero remover um ebook da minha estante pare liberar espaço para
 
 ### HU04, Gerar relatório de eBook por estante
 Como bibliotecario, eu quero que o sistema gere um relatório dos alunos com um determinado ebook na estante para saber quais alunos têm determinado eBook em sua estante 
+
+### HU05, Cadastrar disciplina
+Como equipe da biblioteca, eu quero cadastrar disciplinas para atribuir os eBooks as suas respectivas disciplinas
