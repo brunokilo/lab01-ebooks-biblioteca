@@ -23,6 +23,7 @@ rectangle "Sistema de Gestão de eBooks" {
   usecase "Verificar quantidade de ebooks na estante" as UC11
   usecase "Verificar quantidade de licenças disponiveis" as UC12
   usecase "Cadastrar aluno" as UC13
+  usecase "Cadastrar bibliotecário" as UC14
 }
 
 Usuario <|-- Equipe_Biblioteca 
@@ -36,6 +37,8 @@ Equipe_Biblioteca --> (UC06)
 Equipe_Biblioteca --> (UC07)
 Equipe_Biblioteca --> (UC08)
 Equipe_Biblioteca --> (UC13)
+Equipe_Biblioteca --> (UC14)
+UC14 --> Bibliotecario
 
 Bibliotecario --> (UC04)
 
