@@ -21,3 +21,5 @@ Como equipe da biblioteca, eu quero cadastrar categorias para atribuir os eBooks
 ### HU07, Alterar categoria
 Como equipe da biblioteca, eu quero alterar categorias para realizar mudança na categoria dejesada quando for necessário.
 
+### HU08, Excluir categoria
+Como equipe da biblioteca, eu quero excluir categorias para naõ correr o risco de usar uma categoria que não quando é mais necessária.
