@@ -1,0 +1,5 @@
+## Semana 1
+
+Contribuição: Junto com minha dupla, fizemos o brainstorm na aula [link brainstorm](./../../brainstorm/brainstorm.txt). Fiz a maior parte dos casos de uso e minha dupla fez a maior parte das histórias de usuário. 
+Decisoes: No domingo (16/08) nos reunimos e discutimos sobre a nossa decisão de separar os atores entre usuário, aluno, bibliotecario e equipe da biblioteca. Mantivemos a decisão e alinhamos as opiniões. Decidimos manter um caso de uso para cadastrar aluno, pois entedemos que a equipe da biblioteca é quem cadastra os alunos.
+Como o final do enunciado diz que todos os USUÁRIOS têm senhas que são utilizadas para o login, deixei um ator com a função de gerenciar senha para que todos os usuários herdem esse caso de uso. Optei por colocar o caso de uso como: "gerenciar senha" para incluir as operações de cadastrar, atualizar e deletar.
