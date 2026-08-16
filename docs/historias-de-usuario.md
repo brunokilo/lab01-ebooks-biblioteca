@@ -14,3 +14,6 @@ Como bibliotecario, eu quero que o sistema gere um relatório dos alunos com um 
 
 ### HU05, Cadastrar disciplina
 Como equipe da biblioteca, eu quero cadastrar disciplinas para atribuir os eBooks as suas respectivas disciplinas
+
+### HU06, Cadastrar categoria
+Como equipe da biblioteca, eu quero cadastrar categorias para atribuir os eBooks as suas respectivas categorias
