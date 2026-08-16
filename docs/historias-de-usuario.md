@@ -1,7 +1,7 @@
 ## Histórias de Usuário
 
-### HU01, Realizar login
-Como usuário do sistema, eu quero informar minha senha para ter acesso a minha conta pessoal.
+### HU01, Gerenciar Senha
+Como usuário do sistema, eu quero gerenciar minha senha para ter acesso a minha conta pessoal.
 
 ### HU02, Adicionar eBook a estante
 Como aluno, eu quero acidionar um ebook a minha estante pare ter acesso durante o semestre.
@@ -23,3 +23,16 @@ Como equipe da biblioteca, eu quero alterar categorias para realizar mudança na
 
 ### HU08, Excluir categoria
 Como equipe da biblioteca, eu quero excluir categorias para naõ correr o risco de usar uma categoria que não quando é mais necessária.
+
+### HU09, Cadastrar editora
+Como equipe da biblioteca, eu quero cadastrar editoras para atribuir os eBooks as suas respectivas editoras e facilitar buscas.
+
+### HU10, Cadastrar ebook
+Como equipe da biblioteca, eu quero cadastrar ebooks para que os alunos possam reservá-los.
+
+### HU11, Editar ebook
+Como equipe da biblioteca, eu quero editar ebooks para realizar alterações caso sejam necessárias.
+
+### HU12, Cadastrar Aluno
+Como equipe da biblioteca, eu quero poder cadastrar um aluno para que ele faça reserva dos livros disponibilizados.
+
