@@ -1,0 +1,38 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Usuário" as Usuario
+actor Aluno
+actor "Bibliotecário" as Bibliotecario
+actor Sistema_de_gerenciamento
+actor "Sistema de estatísticas" as Sistema_de_estatisticas
+
+rectangle "Sistema de Gestão de eBooks" {
+  usecase "Gerenciar login" as UC01
+  usecase "Adicionar ebook a estante pessoal" as UC02
+  usecase "Remover ebook da estante pessoal" as UC03
+  usecase "Gerar relatórios de ebook" as UC04
+  usecase "Remover do catalogo" as UC09
+  usecase "Verificar se esta reservado em 3 estantes" as UC10
+  usecase "Verificar quantidade de ebooks na estante" as UC11
+  usecase "Verificar quantidade de licenças disponiveis" as UC12
+}
+
+Usuario <|-- Bibliotecario 
+Usuario <|-- Aluno 
+
+Usuario --> (UC01)
+
+
+Bibliotecario --> (UC04)
+
+Aluno --> (UC02)
+(UC02)..> (UC11) : <<include>>
+(UC02)..> (UC12) : <<include>>
+(UC02)--> Sistema_de_estatisticas
+Aluno --> (UC03)
+
+Sistema_de_gerenciamento --> (UC09)
+(UC09)..> (UC10) : <<include>>
+@enduml
