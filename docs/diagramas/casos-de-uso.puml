@@ -5,6 +5,7 @@ skinparam packageStyle rectangle
 actor "Usuário" as Usuario
 actor Aluno
 actor "Bibliotecário" as Bibliotecario
+actor Equipe_Biblioteca
 actor Sistema_de_gerenciamento
 actor "Sistema de estatísticas" as Sistema_de_estatisticas
 
@@ -13,17 +14,26 @@ rectangle "Sistema de Gestão de eBooks" {
   usecase "Adicionar ebook a estante pessoal" as UC02
   usecase "Remover ebook da estante pessoal" as UC03
   usecase "Gerar relatórios de ebook" as UC04
+  usecase "Gerenciar eBook" as UC05
+  usecase "Gerenciar editora" as UC06
+  usecase "Gerenciar categoria" as UC07
+  usecase "Gerenciar disciplina" as UC08
   usecase "Remover do catalogo" as UC09
   usecase "Verificar se esta reservado em 3 estantes" as UC10
   usecase "Verificar quantidade de ebooks na estante" as UC11
   usecase "Verificar quantidade de licenças disponiveis" as UC12
 }
 
+Usuario <|-- Equipe_Biblioteca 
 Usuario <|-- Bibliotecario 
 Usuario <|-- Aluno 
 
 Usuario --> (UC01)
 
+Equipe_Biblioteca --> (UC05)
+Equipe_Biblioteca --> (UC06)
+Equipe_Biblioteca --> (UC07)
+Equipe_Biblioteca --> (UC08)
 
 Bibliotecario --> (UC04)
 
