@@ -10,7 +10,7 @@ actor Sistema_de_gerenciamento
 actor "Sistema de estatísticas" as Sistema_de_estatisticas
 
 rectangle "Sistema de Gestão de eBooks" {
-  usecase "Gerenciar login" as UC01
+  usecase "Gerenciar senha" as UC01
   usecase "Adicionar ebook a estante pessoal" as UC02
   usecase "Remover ebook da estante pessoal" as UC03
   usecase "Gerar relatórios de ebook" as UC04
@@ -22,6 +22,7 @@ rectangle "Sistema de Gestão de eBooks" {
   usecase "Verificar se esta reservado em 3 estantes" as UC10
   usecase "Verificar quantidade de ebooks na estante" as UC11
   usecase "Verificar quantidade de licenças disponiveis" as UC12
+  usecase "Cadastrar aluno" as UC13
 }
 
 Usuario <|-- Equipe_Biblioteca 
@@ -34,6 +35,7 @@ Equipe_Biblioteca --> (UC05)
 Equipe_Biblioteca --> (UC06)
 Equipe_Biblioteca --> (UC07)
 Equipe_Biblioteca --> (UC08)
+Equipe_Biblioteca --> (UC13)
 
 Bibliotecario --> (UC04)
 
