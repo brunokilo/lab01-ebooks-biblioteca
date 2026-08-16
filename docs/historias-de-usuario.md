@@ -17,3 +17,7 @@ Como equipe da biblioteca, eu quero cadastrar disciplinas para atribuir os eBook
 
 ### HU06, Cadastrar categoria
 Como equipe da biblioteca, eu quero cadastrar categorias para atribuir os eBooks as suas respectivas categorias
+
+### HU07, Alterar categoria
+Como equipe da biblioteca, eu quero alterar categorias para realizar mudança na categoria dejesada quando for necessário.
+
