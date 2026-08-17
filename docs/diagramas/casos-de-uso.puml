@@ -10,7 +10,7 @@ actor Sistema_de_gerenciamento
 actor "Sistema de estatísticas" as Sistema_de_estatisticas
 
 rectangle "Sistema de Gestão de eBooks" {
-  usecase "Gerenciar senha" as UC01
+  usecase "UC01 - Gerenciar senha" as UC01
   usecase "Adicionar ebook a estante pessoal" as UC02
   usecase "Remover ebook da estante pessoal" as UC03
   usecase "Gerar relatórios de ebook" as UC04
