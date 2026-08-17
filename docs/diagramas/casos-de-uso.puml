@@ -4,6 +4,7 @@ skinparam packageStyle rectangle
 
 actor "Usuário" as Usuario
 actor Aluno
+actor Admistrador
 actor "Bibliotecário" as Bibliotecario
 actor Equipe_Biblioteca
 actor Sistema_de_gerenciamento
@@ -29,8 +30,9 @@ rectangle "Sistema de Gestão de eBooks" {
 Usuario <|-- Equipe_Biblioteca 
 Usuario <|-- Bibliotecario 
 Usuario <|-- Aluno 
+Usuario <|-- Admistrador
 
-Usuario --> (UC01)
+Admistrador --> (UC01)
 
 Equipe_Biblioteca --> (UC05)
 Equipe_Biblioteca --> (UC06)
