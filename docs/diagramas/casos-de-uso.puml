@@ -16,15 +16,14 @@ rectangle "Sistema de Gestão de eBooks" {
   usecase "UC03 - Remover ebook da estante pessoal" as UC03
   usecase "UC04 - Gerar relatórios de ebook" as UC04
   usecase "UC05 - Gerenciar eBook" as UC05
-  usecase "UC06 - Gerenciar editora" as UC06
-  usecase "UC07 - Gerenciar categoria" as UC07
-  usecase "UC08 - Gerenciar disciplina" as UC08
-  usecase "UC09 - Remover do catalogo" as UC09
-  usecase "UC10 - Verificar se esta reservado em 3 estantes" as UC10
-  usecase "UC11 - Verificar quantidade de ebooks na estante" as UC11
-  usecase "UC12 - Verificar quantidade de licenças disponiveis" as UC12
-  usecase "UC13 - Gerenciar aluno" as UC13
-  usecase "UC14 - Gerenciar bibliotecário" as UC14
+  usecase "UC06 - Gerenciar categoria" as UC06
+  usecase "UC07 - Gerenciar disciplina" as UC07
+  usecase "UC08 - Remover do catalogo" as UC08
+  usecase "UC09 - Verificar se esta reservado em 3 estantes" as UC09
+  usecase "UC10 - Verificar quantidade de ebooks na estante" as UC10
+  usecase "UC11 - Verificar quantidade de licenças disponiveis" as UC11
+  usecase "UC12 - Gerenciar aluno" as UC12
+  usecase "UC13 - Gerenciar bibliotecário" as UC13
 }
 
 Usuario <|-- Equipe_Biblioteca 
@@ -37,18 +36,17 @@ Admistrador --> (UC01)
 Equipe_Biblioteca --> (UC05)
 Equipe_Biblioteca --> (UC06)
 Equipe_Biblioteca --> (UC07)
-Equipe_Biblioteca --> (UC08)
+Equipe_Biblioteca --> (UC12)
 Equipe_Biblioteca --> (UC13)
-Equipe_Biblioteca --> (UC14)
 
 Bibliotecario --> (UC04)
 
 Aluno --> (UC02)
+(UC02)..> (UC10) : <<include>>
 (UC02)..> (UC11) : <<include>>
-(UC02)..> (UC12) : <<include>>
 (UC02)--> Sistema_de_estatisticas
 Aluno --> (UC03)
 
-Sistema_de_gerenciamento --> (UC09)
-(UC09)..> (UC10) : <<include>>
+Sistema_de_gerenciamento --> (UC08)
+(UC08)..> (UC09) : <<include>>
 @enduml

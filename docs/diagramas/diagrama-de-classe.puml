@@ -1,10 +1,10 @@
 @startuml diagrama_de_classes_ebooks
 
 class Usuario {
-  -id: String
-  -nome: String
-  -senha: String
-  +autenticar(senhaDigitada: String): boolean
+  #id: String
+  #nome: String
+  #senha: String
+  #autenticar(senhaDigitada: String): boolean
 }
 
 class Administrador{
@@ -24,9 +24,27 @@ class Bibliotecario {
 class Equipe_Biblioteca{
   -registroFuncional: String
   +cadastrarAluno() : Aluno
+  +editarAluno(aluno: Aluno) : Aluno
+  +removerAluno(aluno: Aluno) : Aluno
+  +cadastrarBibliotecario() : Bibliotecario
+  +editarBibliotecario(bibliotecario: Bibliotecario) : Bibliotecario
+  +removerBibliotecario(bibliotecario: Bibliotecario) : Bibliotecario
   +cadastrarDisciplina() : Disciplina
+  +editarDisciplina(disciplina: Disciplina) : Disciplina
+  +removerDisciplina(disciplina: Disciplina) : Disciplina
   +cadastrarCategoria() : Categoria
+  +editarCategoria(categoria: Categoria) : Categoria
+  +excluirCategoria(categoria: Categoria) : Categoria
 
+}
+
+class Disciplina{
+  -periodo: Int
+  -nome: String
+}
+
+class Categoria{
+  -descricao: String
 }
 
 class EBook {
@@ -34,12 +52,15 @@ class EBook {
   -editora: String
   -formato: String
   -categoria: String
+  +verificaQtdMinimaEbook() : boolean
+  +removerPorlicecaExpirada(ebook: EBook) : boolean
 }
 
 class Licenca {
   -limiteAcessosSimultaneos: int
   -acessosAtivos: int
-  +temVagaDisponivel(): boolean
+  +temVagaDisponivel(ebook :EBook): boolean
+  +licencaExpirada() :boolean
 }
 
 class Estante {
@@ -57,4 +78,10 @@ Usuario <|-- Administrador
 Aluno "1" *-- "1" Estante
 Estante "1" o-- "0..6" EBook
 EBook "1" -- "1" Licenca
+EBook "1..*" -- "1" Disciplina
+Equipe_Biblioteca "1" -- "0..*" Aluno
+Equipe_Biblioteca "1" -- "0..*" Bibliotecario
+Equipe_Biblioteca "1" -- "0..*" EBook
+Equipe_Biblioteca "1" -- "0..*" Disciplina
+Equipe_Biblioteca "1" -- "0..*" Categoria
 @enduml
