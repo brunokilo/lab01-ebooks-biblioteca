@@ -53,7 +53,7 @@ class EBook {
   -formato: String
   -categoria: String
   +verificaQtdMinimaEbook() : boolean
-  +removerPorlicecaExpirada(ebook: EBook) : boolean
+  +removerPorLicencaExpirada(ebook: EBook) : boolean
 }
 
 class Licenca {
