@@ -61,7 +61,6 @@ class EBook {
   +verificaQtdMinimaEbook() : boolean
   +removerPorLicencaExpirada(ebook: EBook) : void
   +ehObrigatorio(ebook: EBook) : boolean
-  +getObrigatoriedade() : boolean
   +setObrigatoriedade() : boolean
 }
 
