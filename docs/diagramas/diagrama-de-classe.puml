@@ -58,6 +58,7 @@ class EBook {
   -editora: String
   -formato: String
   -categoria: String
+  -obrigatorio: boolean
   +verificaQtdMinimaEbook() : boolean
   +removerPorLicencaExpirada(ebook: EBook) : void
   +ehObrigatorio(ebook: EBook) : boolean
