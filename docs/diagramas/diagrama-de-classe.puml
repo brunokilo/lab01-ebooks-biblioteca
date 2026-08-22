@@ -35,12 +35,18 @@ class Equipe_Biblioteca{
   +cadastrarCategoria() : Categoria
   +editarCategoria(categoria: Categoria) : Categoria
   +excluirCategoria(categoria: Categoria) : Categoria
-
+  +cadastrarEBook(): EBook
+  +editarEBook(eBook: EBook): EBook
+  +excluirEBook(eBook: EBook): EBook
 }
 
 class Disciplina{
   -periodo: Int
+  -inicioPeriodo: Date
+  -fimPeriodo: Date
   -nome: String
+  -eBooks: List
+  +indicarEBooK(eBook: EBook): void
 }
 
 class Categoria{
@@ -53,7 +59,10 @@ class EBook {
   -formato: String
   -categoria: String
   +verificaQtdMinimaEbook() : boolean
-  +removerPorLicencaExpirada(ebook: EBook) : boolean
+  +removerPorLicencaExpirada(ebook: EBook) : void
+  +ehObrigatorio(ebook: EBook) : boolean
+  +getObrigatoriedade() : boolean
+  +setObrigatoriedade() : boolean
 }
 
 class Licenca {
@@ -64,6 +73,8 @@ class Licenca {
 }
 
 class Estante {
+  -qtdObrigatorio: Int
+  -qtdNaoObrigatorio: Int
   +adicionar(ebook: EBook): void
   +remover(ebook: EBook): void
   +listar(): List
