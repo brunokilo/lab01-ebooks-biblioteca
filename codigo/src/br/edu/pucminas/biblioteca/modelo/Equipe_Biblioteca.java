@@ -1,6 +1,14 @@
 package br.edu.pucminas.biblioteca.modelo;
 
 public class Equipe_Biblioteca extends Usuario {
+
+    private String registroFuncional;
+
+
+    public Equipe_Biblioteca(String id, String nome, String senha, String registroFuncional){
+        super(id, nome, senha);
+        this.registroFuncional = registroFuncional;
+    }
     
     public Aluno cadastrarAluno(String id, String nome, String senha) {
         //TODO: Implementar na Sprint 3.
