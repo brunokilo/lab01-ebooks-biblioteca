@@ -3,6 +3,8 @@ package br.edu.pucminas.biblioteca.modelo;
 import java.util.List;
 
 public class Estante {
+    private final int maxQtdObrigatorio = 4;
+    private final int maxQtdNaoObrigatorio = 2;
     private int qtdObrigatorio;
     private int qtdNaoObrigatorio;
 

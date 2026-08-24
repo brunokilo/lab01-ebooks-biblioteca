@@ -9,10 +9,12 @@ public class Licenca {
     }
     
     public boolean temVagaDisponivel(Ebook ebook){
+        // TODO: implementar na Sprint 3
         return false;
     } 
     
     public boolean licencaExpirada(){
+        // TODO: implementar na Sprint 3
         return false;
     }
 
