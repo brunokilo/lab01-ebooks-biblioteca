@@ -7,13 +7,15 @@ public class Ebook {
     private Categoria categoria; 
     private boolean obrigatorio;
     private Licenca licenca;
+    private Disciplina disciplina;
 
-    public Ebook (String titulo, String editora, String formato, Categoria categoria){
+    public Ebook (String titulo, String editora, String formato, Categoria categoria, Disciplina disciplina){
         this.titulo = titulo;
         this.editora = editora;
         this.formato = formato;
         this.categoria = categoria;
         this.obrigatorio = false;
+        this.disciplina = disciplina;
     }
 
     public boolean verificaQtdMinimaEbook(){
