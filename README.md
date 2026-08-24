@@ -10,4 +10,6 @@ O software será responsável por fazer a gestão de e-books que fazem parte do 
 
 [Historias de usuario](./docs/historias-de-usuario.md)
 
+[Diagrama de classes](./docs/diagramas/diagrama-de-classe.png)
+
 [Link do repositório](https://github.com/brunokilo/lab01-ebooks-biblioteca)
