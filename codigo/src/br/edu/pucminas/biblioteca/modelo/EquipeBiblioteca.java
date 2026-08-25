@@ -1,11 +1,11 @@
 package br.edu.pucminas.biblioteca.modelo;
 
-public class Equipe_Biblioteca extends Usuario {
+public class EquipeBiblioteca extends Usuario {
 
     private String registroFuncional;
 
 
-    public Equipe_Biblioteca(String id, String nome, String senha, String registroFuncional){
+    public EquipeBiblioteca(String id, String nome, String senha, String registroFuncional){
         super(id, nome, senha);
         this.registroFuncional = registroFuncional;
     }
