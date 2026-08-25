@@ -9,8 +9,7 @@ public class Licenca {
     }
     
     public boolean temVagaDisponivel(Ebook ebook){
-        // TODO: implementar na Sprint 3
-        return false;
+        return (acessosAtivos < limiteAcessosSimultaneos);
     } 
     
     public boolean licencaExpirada(){
@@ -18,11 +17,15 @@ public class Licenca {
         return false;
     }
 
-    public int getAcessosAtivos() {
-        return acessosAtivos;
+    public void incrementarAcessosAtivos(){
+        this.acessosAtivos++;
     }
 
-    public void setAcessosAtivos(int acessosAtivos) {
-        this.acessosAtivos = acessosAtivos;
+    public void decrementarAcessosAtivos(){
+        this.acessosAtivos--;
+    }
+
+    public int getAcessosAtivos() {
+        return acessosAtivos;
     }
 }
