@@ -1,5 +1,6 @@
 package br.edu.pucminas.biblioteca.modelo;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Bibliotecario extends Usuario {
@@ -11,10 +12,14 @@ public class Bibliotecario extends Usuario {
         this.registroFuncional = registroFuncional;
     }
 
-    public List consultarAlunosComEBook(Ebook ebook){
-        //TODO: Implementar na Sprint 3.
-
-        return consultarAlunosComEBook(ebook);
+    public List<Aluno> consultarAlunosComEBook(List<Aluno> alunos, Ebook ebook){
+        List<Aluno> alunosComEbbok = new LinkedList<>();
+        for (Aluno aluno : alunos) {
+            if (aluno.getEstante().temEbook(ebook)) {
+                alunosComEbbok.add(aluno);
+            }
+        }
+        return alunosComEbbok;
     }
     
 }

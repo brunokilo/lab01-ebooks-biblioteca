@@ -62,4 +62,13 @@ public class Estante {
         }
         return cont;
     }
+
+    public boolean temEbook(Ebook ebook){
+        for (Ebook eBook : eBooks) {
+            if (eBook.equals(ebook)) {
+                return true;
+            }            
+        }
+        return false;
+    }
 }
