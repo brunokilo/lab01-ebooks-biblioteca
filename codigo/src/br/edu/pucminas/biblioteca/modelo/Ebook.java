@@ -7,8 +7,9 @@ public class Ebook {
     private Categoria categoria; 
     private boolean obrigatorio;
     private Licenca licenca;
+    
     private Disciplina disciplina;
-
+    
     public Ebook (String titulo, String editora, String formato, Categoria categoria, Disciplina disciplina){
         this.titulo = titulo;
         this.editora = editora;
@@ -17,7 +18,7 @@ public class Ebook {
         this.obrigatorio = false;
         this.disciplina = disciplina;
     }
-
+    
     public boolean verificaQtdMinimaEbook(){
         // TODO: implementar na Sprint 3
         return false;
@@ -33,5 +34,9 @@ public class Ebook {
 
     public void setObrigatorio(boolean obrigatorio) {
         this.obrigatorio = obrigatorio;
+    }
+
+    public Licenca getLicenca() {
+        return licenca;
     }
 }
