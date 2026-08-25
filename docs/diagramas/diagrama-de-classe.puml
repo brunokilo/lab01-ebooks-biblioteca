@@ -14,30 +14,21 @@ class Administrador{
 class Aluno {
   -matricula: String
   -estante : List
+  +cadastrarAluno() : Aluno
+  +editarAluno(aluno: Aluno) : Aluno
+  +removerAluno(aluno: Aluno) : Aluno
 }
 
 class Bibliotecario {
   -registroFuncional: String
+  +cadastrarBibliotecario() : Bibliotecario
+  +editarBibliotecario(bibliotecario: Bibliotecario) : Bibliotecario
+  +removerBibliotecario(bibliotecario: Bibliotecario) : Bibliotecario
   +consultarAlunosComEBook(ebook: EBook): List
 }
 
 class Equipe_Biblioteca{
   -registroFuncional: String
-  +cadastrarAluno() : Aluno
-  +editarAluno(aluno: Aluno) : Aluno
-  +removerAluno(aluno: Aluno) : Aluno
-  +cadastrarBibliotecario() : Bibliotecario
-  +editarBibliotecario(bibliotecario: Bibliotecario) : Bibliotecario
-  +removerBibliotecario(bibliotecario: Bibliotecario) : Bibliotecario
-  +cadastrarDisciplina() : Disciplina
-  +editarDisciplina(disciplina: Disciplina) : Disciplina
-  +removerDisciplina(disciplina: Disciplina) : Disciplina
-  +cadastrarCategoria() : Categoria
-  +editarCategoria(categoria: Categoria) : Categoria
-  +excluirCategoria(categoria: Categoria) : Categoria
-  +cadastrarEBook(): EBook
-  +editarEBook(eBook: EBook): EBook
-  +excluirEBook(eBook: EBook): EBook
 }
 
 class Disciplina{
@@ -46,11 +37,17 @@ class Disciplina{
   -fimPeriodo: Date
   -nome: String
   -eBooks: List
+  +cadastrarDisciplina() : Disciplina
+  +editarDisciplina(disciplina: Disciplina) : Disciplina
+  +removerDisciplina(disciplina: Disciplina) : Disciplina
   +indicarEBooK(eBook: EBook): void
 }
 
 class Categoria{
   -descricao: String
+  +cadastrarCategoria() : Categoria
+  +editarCategoria(categoria: Categoria) : Categoria
+  +excluirCategoria(categoria: Categoria) : Categoria
 }
 
 class EBook {
@@ -59,6 +56,9 @@ class EBook {
   -formato: String
   -categoria: String
   -obrigatorio: boolean
+  +cadastrarEBook(): EBook
+  +editarEBook(eBook: EBook): EBook
+  +excluirEBook(eBook: EBook): EBook
   +verificaQtdMinimaEbook() : boolean
   +removerPorLicencaExpirada(ebook: EBook) : void
   +ehObrigatorio(ebook: EBook) : boolean
@@ -90,9 +90,8 @@ Aluno "1" *-- "1" Estante
 Estante "1" o-- "0..6" EBook
 EBook "1" -- "1" Licenca
 EBook "1..*" -- "1" Disciplina
+EBook "0..*" -- "1" Categoria
 Equipe_Biblioteca "1" -- "0..*" Aluno
 Equipe_Biblioteca "1" -- "0..*" Bibliotecario
 Equipe_Biblioteca "1" -- "0..*" EBook
-Equipe_Biblioteca "1" -- "0..*" Disciplina
-Equipe_Biblioteca "1" -- "0..*" Categoria
 @enduml
