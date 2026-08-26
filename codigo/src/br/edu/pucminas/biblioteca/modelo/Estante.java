@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Estante {
+    //TODO implementar o resto das exceções
     private final int maxQtdObrigatorio = 4;
     private final int maxQtdNaoObrigatorio = 2;
     private final List<Ebook> eBooks;
@@ -43,7 +44,7 @@ public class Estante {
         return eBooks.size();
     }
 
-    public int contarEBooksObrigatorios(){
+    private int contarEBooksObrigatorios(){
         int cont = 0;
         for (Ebook ebook : eBooks) {
             if (ebook.isObrigatorio()) {
@@ -53,7 +54,7 @@ public class Estante {
         return cont;
     }
 
-    public int contarEBooksNaoObrigatorio(){
+    private int contarEBooksNaoObrigatorio(){
         int cont = 0;
         for (Ebook ebook : eBooks) {
             if (!ebook.isObrigatorio()) {

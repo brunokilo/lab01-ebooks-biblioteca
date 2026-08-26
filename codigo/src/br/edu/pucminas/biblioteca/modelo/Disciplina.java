@@ -5,18 +5,27 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Disciplina {
+    //TODO implementar o resto das exceções
     private int periodo;
     private LocalDate inicioPeriodo;
     private LocalDate fimPeriodo;
     private String nome;
     private final List<Ebook> eBooks;
-    
-    public Disciplina(int periodo, LocalDate inicioPeriodo, LocalDate fimPeriodo, String nome){
+
+    private void init(int periodo, LocalDate inicioPeriodo, LocalDate fimPeriodo, String nome){
         this.periodo = periodo;
         this.inicioPeriodo = inicioPeriodo;
         this.fimPeriodo = fimPeriodo;
         this.nome = nome;
+    }
+    
+    public Disciplina(int periodo, LocalDate inicioPeriodo, LocalDate fimPeriodo, String nome){
+        init(periodo, inicioPeriodo, fimPeriodo, nome);
         this.eBooks = new LinkedList<>();
+    }
+
+    public void editar(int periodo, LocalDate inicioPeriodo, LocalDate fimPeriodo, String nome){
+        init(periodo, inicioPeriodo, fimPeriodo, nome);
     }
 
     public void indicarEBooK(Ebook eBook){

@@ -1,13 +1,23 @@
 package br.edu.pucminas.biblioteca.modelo;
 
 public class Aluno extends Usuario {
+    //TODO implementar o resto das exceções
     private String matricula;
     private Estante estante;
 
-    
+    private void init (String matricula){
+        this.matricula = matricula;
+        this.estante = new Estante();
+    }
+
     public Aluno(String id, String nome, String senha, String matricula) {
         super(id, nome, senha);
-        this.matricula = matricula;
+        init(matricula);
+    }
+
+    public void editar(String nome, String senha, String matricula){
+        super.editar(nome, senha);
+        init(matricula);
     }
     
     public Estante getEstante() {

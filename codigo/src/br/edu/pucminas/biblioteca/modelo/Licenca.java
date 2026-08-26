@@ -1,6 +1,7 @@
 package br.edu.pucminas.biblioteca.modelo;
 
 public class Licenca {
+    //TODO implementar o resto das exceções
     private final int limiteAcessosSimultaneos = 60;
     private final int minimoAcessosPorSemestre = 3;
     private int acessosAtivos;
