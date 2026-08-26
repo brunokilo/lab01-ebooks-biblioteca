@@ -1,11 +1,12 @@
 package br.edu.pucminas.biblioteca.modelo;
 
 public class Aluno extends Usuario {
-    //TODO implementar o resto das exceções
     private String matricula;
     private Estante estante;
 
     private void init (String matricula){
+        if (matricula == null || matricula.isBlank()) 
+            throw new IllegalArgumentException("Matricula do aluno não pode ser vazio");
         this.matricula = matricula;
         this.estante = new Estante();
     }

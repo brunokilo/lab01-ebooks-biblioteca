@@ -4,10 +4,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Bibliotecario extends Usuario {
-    //TODO implementar o resto das exceções
     String registroFuncional;
 
     private void init (String registroFuncional){
+        if (registroFuncional == null || registroFuncional.isBlank()) 
+            throw new IllegalArgumentException("Registro Funcional do bibliotecário não pode ser vazio");
         this.registroFuncional = registroFuncional;
     }
 

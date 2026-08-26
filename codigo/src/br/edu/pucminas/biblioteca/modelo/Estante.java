@@ -4,8 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+//Nota de Transparência sobre Uso de IA
+// pedi auxilio do claude para sugestão de melhoria de escrita para o método adicionar(Ebook ebook) e listar()
+
 public class Estante {
-    //TODO implementar o resto das exceções
     private final int maxQtdObrigatorio = 4;
     private final int maxQtdNaoObrigatorio = 2;
     private final List<Ebook> eBooks;
@@ -15,9 +17,8 @@ public class Estante {
     }
 
     public void adicionar(Ebook ebook){
-        if (!ebook.getLicenca().temVagaDisponivel(ebook)) {
+        if (!ebook.getLicenca().temVagaDisponivel(ebook))
             throw new IllegalStateException("Licença expirada ou sem vagas disponíveis");
-        }
 
         boolean temEspacoNaEstante = ebook.isObrigatorio() 
             ? contarEBooksObrigatorios() < maxQtdObrigatorio 
@@ -30,9 +31,8 @@ public class Estante {
     }
     
     public void remover(Ebook ebook){
-        if (!eBooks.remove(ebook)) {
+        if (!eBooks.remove(ebook))
             throw new NoSuchElementException ("Ebook não existe na estante ou já foi removido");
-        }
         ebook.getLicenca().decrementarAcessosAtivos();
     }
     

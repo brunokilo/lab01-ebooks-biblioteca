@@ -1,6 +1,5 @@
 package br.edu.pucminas.biblioteca.modelo;
 public class Ebook {
-    //TODO implementar o resto das exceções
     private String titulo;
     private String editora;
     private String formato;
@@ -8,21 +7,30 @@ public class Ebook {
     private boolean obrigatorio;
     private Licenca licenca;
 
-    private void init(String titulo, String editora, String formato, Categoria categoria, Disciplina disciplina){
+    private void init(String titulo, String editora, String formato, Categoria categoria){
+        if (titulo == null || titulo.isBlank()) 
+            throw new IllegalArgumentException("Titulo do Ebook não pode ser vazio");
+        
+        if (editora == null || editora.isBlank()) 
+            throw new IllegalArgumentException("Editora do Ebook não pode ser vazio");
+        
+        if (formato == null || formato.isBlank()) 
+            throw new IllegalArgumentException("Formato do Ebook não pode ser vazio");
+        
         this.titulo = titulo;
         this.editora = editora;
         this.formato = formato;
         this.categoria = categoria;
         this.obrigatorio = false;
-    }
-    
-    public Ebook (String titulo, String editora, String formato, Categoria categoria, Disciplina disciplina){
-        init(titulo, editora, formato, categoria, disciplina);
         this.licenca = new Licenca();
     }
+    
+    public Ebook (String titulo, String editora, String formato, Categoria categoria){
+        init(titulo, editora, formato, categoria);
+    }
 
-    public void editar(String titulo, String editora, String formato, Categoria categoria, Disciplina disciplina){
-        init(titulo, editora, formato, categoria, disciplina);
+    public void editar(String titulo, String editora, String formato, Categoria categoria){
+        init(titulo, editora, formato, categoria);
     }
 
     public boolean isObrigatorio() {
