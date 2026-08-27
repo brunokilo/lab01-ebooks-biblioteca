@@ -5,6 +5,7 @@ class Usuario {
   #nome: String
   #senha: String
   #autenticar(senhaDigitada: String): boolean
+  #editar(id: String, nome: String, senha: String) : void
 }
 
 class Administrador{
@@ -15,39 +16,40 @@ class Aluno {
   -matricula: String
   -estante : List
   +cadastrarAluno() : Aluno
-  +editarAluno(aluno: Aluno) : Aluno
-  +removerAluno(aluno: Aluno) : Aluno
+  +editar(nome: String, senha: String, matricula: String) : void
 }
 
 class Bibliotecario {
   -registroFuncional: String
   +cadastrarBibliotecario() : Bibliotecario
-  +editarBibliotecario(bibliotecario: Bibliotecario) : Bibliotecario
+  +editar(id: String, nome: String, senha: String, registroFuncional: String) : void
   +removerBibliotecario(bibliotecario: Bibliotecario) : Bibliotecario
-  +consultarAlunosComEBook(ebook: EBook): List
+  +consultarAlunosComEBook(alunos: List, ebook: EBook): List
 }
 
 class Equipe_Biblioteca{
   -registroFuncional: String
+  +removerAluno(aluno: Aluno) : Aluno
+  +removerDisciplina(disciplina: Disciplina) : Disciplina
+  +excluirCategoria(categoria: Categoria) : Categoria
+  +excluirEBook(eBook: EBook): EBook
 }
 
 class Disciplina{
   -periodo: Int
-  -inicioPeriodo: Date
-  -fimPeriodo: Date
+  -inicioPeriodo: LocalDate
+  -fimPeriodo: LocalDate
   -nome: String
   -eBooks: List
-  +cadastrarDisciplina() : Disciplina
-  +editarDisciplina(disciplina: Disciplina) : Disciplina
-  +removerDisciplina(disciplina: Disciplina) : Disciplina
+  +editar(periodo: int, inicioPeriodo: LocalDate, fimPeriodo: LocalDate, nome: String) : void
   +indicarEBooK(eBook: EBook): void
+  +removerEbookPorLicencaExpirada():void
 }
 
 class Categoria{
   -descricao: String
   +cadastrarCategoria() : Categoria
   +editarCategoria(categoria: Categoria) : Categoria
-  +excluirCategoria(categoria: Categoria) : Categoria
 }
 
 class EBook {
@@ -56,20 +58,18 @@ class EBook {
   -formato: String
   -categoria: String
   -obrigatorio: boolean
-  +cadastrarEBook(): EBook
-  +editarEBook(eBook: EBook): EBook
-  +excluirEBook(eBook: EBook): EBook
-  +verificaQtdMinimaEbook() : boolean
-  +removerPorLicencaExpirada(ebook: EBook) : void
-  +ehObrigatorio(ebook: EBook) : boolean
-  +setObrigatoriedade() : boolean
+  +editarEBook(titulo: String, editora: String, formato: String, categoria: Categoria): EBook
+  +isObrigatorio() : boolean
+  +setObrigatorio() : boolean
 }
 
 class Licenca {
   -limiteAcessosSimultaneos: int
   -acessosAtivos: int
   +temVagaDisponivel(ebook :EBook): boolean
-  +licencaExpirada() :boolean
+  +acessosAtivosMenorQueMinimoPermitido(): boolean
+  +incrementarAcessosAtivos(): void
+  +decrementarAcessosAtivos(): void
 }
 
 class Estante {
@@ -79,6 +79,9 @@ class Estante {
   +remover(ebook: EBook): void
   +listar(): List
   +contarEBooks(): int
+  -contarEBooksObrigatorios(): int
+  -contarNaoEBooksObrigatorios(): int
+  +temEbook(ebook: Ebook): boolean
 }
 
 Usuario <|-- Aluno
