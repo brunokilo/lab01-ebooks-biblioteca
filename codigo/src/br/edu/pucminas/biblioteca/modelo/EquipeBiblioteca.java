@@ -5,22 +5,18 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class EquipeBiblioteca extends Usuario {
-
+ 
     private String registroFuncional;
-    private final List<Aluno> alunos;
-    private final List<Bibliotecario> bibliotecarios;
-    private final List<Disciplina> disciplinas;
-    private final List<Categoria> categorias;
+    private static final List<Aluno> alunos = new LinkedList<>();
+    private static final List<Bibliotecario> bibliotecarios = new LinkedList<>();
+    private static final List<Disciplina> disciplinas = new LinkedList<>();
+    private static final List<Categoria> categorias = new LinkedList<>();
 
     public EquipeBiblioteca(String nome, String senha, String registroFuncional) {
         super(nome, senha);
         if (registroFuncional == null || registroFuncional.isBlank())
             throw new IllegalArgumentException("Registro Funcional não pode ser vazio");
         this.registroFuncional = registroFuncional;
-        this.alunos = new LinkedList<>();
-        this.bibliotecarios = new LinkedList<>();
-        this.disciplinas = new LinkedList<>();
-        this.categorias = new LinkedList<>();
     }
 
     public Aluno cadastrarAluno(String id, String nome, String senha, String matricula) {
