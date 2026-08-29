@@ -44,4 +44,16 @@ public class Ebook {
     public Licenca getLicenca() {
         return licenca;
     }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getEditora() {
+        return editora;
+    }
+
+    public String getFormato() {
+        return formato;
+    }
 }

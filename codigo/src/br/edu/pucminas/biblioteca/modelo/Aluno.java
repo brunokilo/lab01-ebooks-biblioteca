@@ -11,8 +11,8 @@ public class Aluno extends Usuario {
         this.estante = new Estante();
     }
 
-    public Aluno(String id, String nome, String senha, String matricula) {
-        super(id, nome, senha);
+    public Aluno(String nome, String senha, String matricula) {
+        super(nome, senha);
         init(matricula);
     }
 

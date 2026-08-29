@@ -12,9 +12,9 @@ public class Bibliotecario extends Usuario {
         this.registroFuncional = registroFuncional;
     }
 
-    public Bibliotecario(String id, String nome, String senha, String registroFuncional) {
-        super(id, nome, senha);
-        this.registroFuncional = registroFuncional;
+    public Bibliotecario(String nome, String senha, String registroFuncional) {
+        super(nome, senha);
+        init(registroFuncional);
     }
 
     public void editar(String nome, String senha, String registroFuncional){
