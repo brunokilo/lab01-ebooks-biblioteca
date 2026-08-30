@@ -19,16 +19,16 @@ public class EquipeBiblioteca extends Usuario {
         this.registroFuncional = registroFuncional;
     }
 
-    public Aluno cadastrarAluno(String id, String nome, String senha, String matricula) {
+    public Aluno cadastrarAluno(String nome, String senha, String matricula) {
         Aluno aluno = new Aluno(nome, senha, matricula);
         alunos.add(aluno);
         return aluno;
     }
 
-    public Aluno editarAluno(Aluno aluno, String nome, String senha, String matricula) {
+    public Aluno editarAluno(Aluno aluno, String nome, String matricula) {
         if (!alunos.contains(aluno))
             throw new NoSuchElementException("Aluno não encontrado");
-        aluno.editar(nome, senha, matricula);
+        aluno.editar(nome, matricula);
         return aluno;
     }
 
