@@ -5,6 +5,18 @@ public class Categoria {
     private String descricao;
 
     public Categoria(String categoria) {
-        //TODO: Implementar na Sprint 3.
+        if (categoria == null)
+            throw new IllegalArgumentException("Descrição da categoria não pode ser nula");
+        this.descricao = categoria;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void editar(String categoria){
+        if (categoria == null || categoria.isBlank())
+            throw new IllegalArgumentException("Descrição da categoria não pode ser vazia");
+        this.descricao = categoria;
     }
 }

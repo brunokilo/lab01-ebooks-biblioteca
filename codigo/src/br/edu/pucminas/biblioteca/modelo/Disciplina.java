@@ -53,4 +53,9 @@ public class Disciplina {
             fimPeriodo.isBefore(LocalDate.now()) && ebook.getLicenca().acessosAtivosMenorQueMinimoPermitido()
         );
     }
+
+    @Override
+    public String toString(){
+        return "Disciplina: " + nome;
+    }
 }
