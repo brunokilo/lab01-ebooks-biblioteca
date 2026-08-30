@@ -4,12 +4,17 @@ import br.edu.pucminas.biblioteca.modelo.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.IOException;
+import br.edu.pucminas.biblioteca.persistencia.EbookRepositorioArquivo;
+import br.edu.pucminas.biblioteca.persistencia.UsuarioRepositorioArquivo;
 
 public class App {
 
     private static final Scanner leitor = new Scanner(System.in);
     private static final EquipeBiblioteca equipe = new EquipeBiblioteca("Equipe teste", "teste", "teste");
     private static final Bibliotecario bibliotecarioPadrao = new Bibliotecario("Bibliotecario teste", "teste", "teste");
+    private static final EbookRepositorioArquivo ebookRepositorio = new EbookRepositorioArquivo();
+    private static final UsuarioRepositorioArquivo usuarioRepositorio = new UsuarioRepositorioArquivo();
 
     private static final List<Aluno> todosAlunos = new LinkedList<>();
     private static final List<Categoria> todasCategorias = new LinkedList<>();
@@ -35,7 +40,42 @@ public class App {
         System.out.print("Escolha uma opcao: ");
     }
 
+    private static void carregarDados() {
+        try {
+            todosEbooks.addAll(ebookRepositorio.carregar());
+
+            UsuarioRepositorioArquivo.UsuariosCarregados carregados = usuarioRepositorio.carregar();
+            todosAlunos.addAll(carregados.alunos);
+            todosBibliotecarios.addAll(carregados.bibliotecarios);
+            todasEquipes.addAll(carregados.equipes);
+            todosAdministradores.addAll(carregados.administradores);
+
+            System.out.println("Dados carregados: " + todosEbooks.size() + " eBook(s), "
+                + todosAlunos.size() + " aluno(s), " + todosBibliotecarios.size() + " bibliotecario(s), "
+                + todasEquipes.size() + " equipe(s), " + todosAdministradores.size() + " administrador(es).");
+        } catch (IOException e) {
+            System.out.println("Nao foi possivel carregar os dados salvos: " + e.getMessage());
+        }
+    }
+
+    private static void salvarEbooks() {
+        try {
+            ebookRepositorio.salvar(todosEbooks);
+        } catch (IOException e) {
+            System.out.println("Nao foi possivel salvar os eBooks: " + e.getMessage());
+        }
+    }
+
+    private static void salvarUsuarios() {
+        try {
+            usuarioRepositorio.salvar(todosAlunos, todosBibliotecarios, todasEquipes, todosAdministradores);
+        } catch (IOException e) {
+            System.out.println("Nao foi possivel salvar os usuarios: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
+        carregarDados();
         boolean continuar = true;
         while (continuar) {
             imprimirMenu();
@@ -105,6 +145,7 @@ public class App {
         ebook.setObrigatorio(obrigatorio);
         todosEbooks.add(ebook);
         System.out.println("eBook cadastrado: " + ebook.getTitulo() + " (categoria: " + categoria.getDescricao() + ")");
+        salvarEbooks();
     }
 
     private static String escolherFormato() {
@@ -161,6 +202,7 @@ public class App {
         aluno.getEstante().adicionar(ebook);
         System.out.println("eBook \"" + ebook.getTitulo() + "\" reservado para " + aluno.getNome()
             + " (acessos ativos na licenca: " + ebook.getLicenca().getAcessosAtivos() + "/60)");
+        salvarEbooks();
     }
 
     private static void cadastrarAluno() {
@@ -174,6 +216,7 @@ public class App {
         Aluno aluno = equipe.cadastrarAluno(nome, senha, matricula);
         todosAlunos.add(aluno);
         System.out.println("Aluno cadastrado: " + aluno.getNome() + " (id gerado: " + aluno.getId() + ")");
+        salvarUsuarios();
     }
 
     private static void consultarAluno() {
@@ -198,8 +241,8 @@ public class App {
 
         List<Ebook> ebooks = aluno.getEstante().listar();
         System.out.println("Estante de " + aluno.getNome() + " (" + ebooks.size() + " eBooks):");
-        for (Ebook e : ebooks) {
-            System.out.println("- " + e.getTitulo() + " (" + e.getEditora() + ", " + e.getFormato() + ")");
+        for (Ebook ebook : ebooks) {
+            System.out.println("- " + ebook.getTitulo() + " (" + ebook.getEditora() + ", " + ebook.getFormato() + ")");
         }
     }
 
