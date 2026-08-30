@@ -32,20 +32,29 @@ public class App {
 
     public static void imprimirMenu() {
         System.out.println("\n--- Bem vindo a biblioteca: ---");
+
+        System.out.println("\n--- Menu Equipe da biblioteca: ---");
         System.out.println(" 1. Cadastrar categoria");
         System.out.println(" 2. Cadastrar eBook");
-        System.out.println(" 3. Reservar eBook para um aluno");
-        System.out.println(" 4. Cadastrar aluno");
-        System.out.println(" 5. Consultar aluno (nome e quantidade de livros)");
-        System.out.println(" 6. Listar estante de um aluno (nome e livros)");
-        System.out.println(" 7. Consultar alunos que possuem um eBook");
-        System.out.println(" 8. Cadastrar bibliotecario");
-        System.out.println(" 9. Cadastrar equipe da biblioteca");
-        System.out.println("10. Cadastrar administrador");
+        System.out.println(" 3. Cadastrar aluno");
+        System.out.println(" 4. Cadastrar bibliotecario");
+        System.out.println(" 5. Cadastrar equipe da biblioteca");
+        System.out.println("6. Cadastrar administrador");
+        System.out.println("7. Cadastrar disciplina");
+        System.out.println("8. Indicar eBook a uma disciplina");
+        
+        System.out.println("\n--- Menu Aluno: ---");
+        System.out.println(" 9. Reservar eBook para um aluno");
+        System.out.println(" 10. Listar estante de um aluno (nome e livros)");
+        
+        System.out.println("\n--- Menu Administrador: ---");
         System.out.println("11. Administrador: redefinir senha de um usuario");
-        System.out.println("12. Cadastrar disciplina");
-        System.out.println("13. Indicar eBook a uma disciplina");
-        System.out.println("14. Sair");
+        
+        System.out.println("\n--- Menu Bibliotecario: ---");
+        System.out.println(" 12. Consultar aluno (nome e quantidade de livros)");
+        System.out.println(" 13. Consultar alunos que possuem um eBook");
+        
+        System.out.println("\n14. Sair");
         System.out.print("Escolha uma opcao: ");
     }
 
@@ -115,17 +124,17 @@ public class App {
                 switch (opcao) {
                     case 1 -> cadastrarCategoria();  
                     case 2 -> cadastrarEbook();
-                    case 3 -> reservarEbookParaAluno();
-                    case 4 -> cadastrarAluno();
-                    case 5 -> consultarAluno();
-                    case 6 -> listarEstante();
-                    case 7 -> consultarAlunosComEbook();
-                    case 8 -> cadastrarBibliotecario();
-                    case 9 -> cadastrarEquipeBiblioteca();
-                    case 10 -> cadastrarAdministrador();
+                    case 3 -> cadastrarAluno();
+                    case 4 -> cadastrarBibliotecario();
+                    case 5 -> cadastrarEquipeBiblioteca();
+                    case 6 -> cadastrarAdministrador();
+                    case 7 -> cadastrarDisciplina();
+                    case 8 -> indicarEbookADisciplina();
+                    case 9 -> reservarEbookParaAluno();
+                    case 10 -> listarEstante();
                     case 11 -> redefinirSenhaDeUsuario();
-                    case 12 -> cadastrarDisciplina();
-                    case 13 -> indicarEbookADisciplina();
+                    case 12 -> consultarAluno();
+                    case 13 -> consultarAlunosComEbook();
                     case 14 -> continuar = false;
                     default -> System.out.println("Opcao invalida.");
                 }
