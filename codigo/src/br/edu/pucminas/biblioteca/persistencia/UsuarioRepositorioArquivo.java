@@ -8,7 +8,7 @@ import java.util.List;
 
 public class UsuarioRepositorioArquivo {
 
-    private static final String ARQUIVO = "br/edu/pucminas/biblioteca/persistencia/usuarios.csv";
+    private static final String ARQUIVO = "codigo/src/br/edu/pucminas/biblioteca/persistencia/usuarios.csv";
 
     public void salvar(List<Aluno> alunos, List<Bibliotecario> bibliotecarios,
                         List<EquipeBiblioteca> equipes, List<Administrador> administradores) throws IOException {

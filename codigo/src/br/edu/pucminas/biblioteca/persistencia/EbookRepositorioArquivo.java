@@ -9,7 +9,7 @@ import java.util.List;
 
 public class EbookRepositorioArquivo {
 
-    private static final String ARQUIVO = "br/edu/pucminas/biblioteca/persistencia/ebooks.csv";
+    private static final String ARQUIVO = "codigo/src/br/edu/pucminas/biblioteca/persistencia/ebooks.csv";
 
     public void salvar(List<Ebook> ebooks) throws IOException {
         File arquivo = new File(ARQUIVO);
