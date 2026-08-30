@@ -1,23 +1,41 @@
 package br.edu.pucminas.biblioteca.modelo;
 
 public class Usuario {
-    
-    private String id;
+
+    private final String id;
+    private static int proximoId = 1;
     private String nome;
     private String senha;
 
-
-    public Usuario (String id, String nome, String senha){
-        if(id == null || nome == null || senha == null){
+    public Usuario(String nome, String senha) {
+        if (nome == null || senha == null) {
             throw new IllegalArgumentException("Ocorreu um erro com um dos dados de criação, tente novamente");
         }
-        
-        this.id = id;
+        this.id = String.valueOf(proximoId++);
         this.nome = nome;
         this.senha = senha;
     }
 
-    protected void autenticar(){
-        //TODO: Implementar na Sprint 3
+    public String getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    protected void editar(String nome, String senha) {
+        if (nome == null || nome.isBlank())
+            throw new IllegalArgumentException("Nome não pode ser vazio");
+        this.nome = nome;
+        this.senha = senha;
+    }
+
+    public boolean autenticar(String senhaDigitadaPeloUsuario) {
+        return this.senha != null && this.senha.equals(senhaDigitadaPeloUsuario);
     }
 }

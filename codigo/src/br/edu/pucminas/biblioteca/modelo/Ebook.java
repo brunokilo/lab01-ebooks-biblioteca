@@ -44,4 +44,25 @@ public class Ebook {
     public Licenca getLicenca() {
         return licenca;
     }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getEditora() {
+        return editora;
+    }
+
+    public String getFormato() {
+        return formato;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    @Override
+    public String toString(){
+        return "Titulo: " + getTitulo() + "| Obrigatoriedade: " + obrigatorio;
+    }
 }
