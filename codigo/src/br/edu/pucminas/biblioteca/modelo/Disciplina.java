@@ -54,6 +54,10 @@ public class Disciplina {
         );
     }
 
+    public List<Ebook> listar(){
+        return List.copyOf(eBooks);
+    }
+
     @Override
     public String toString(){
         return "Disciplina: " + nome;
