@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.io.IOException;
+import java.time.LocalDate;
 import br.edu.pucminas.biblioteca.persistencia.EbookRepositorioArquivo;
 import br.edu.pucminas.biblioteca.persistencia.UsuarioRepositorioArquivo;
 import br.edu.pucminas.biblioteca.persistencia.EstanteRepositorioArquivo;
@@ -24,6 +25,7 @@ public class App {
     private static final List<Bibliotecario> todosBibliotecarios = new LinkedList<>();
     private static final List<EquipeBiblioteca> todasEquipes = new LinkedList<>();
     private static final List<Administrador> todosAdministradores = new LinkedList<>();
+    private static final List<Disciplina> todasDisciplinas = new LinkedList<>();
 
     public static void imprimirMenu() {
         System.out.println("\n--- Bem vindo a biblioteca: ---");
@@ -38,7 +40,9 @@ public class App {
         System.out.println(" 9. Cadastrar equipe da biblioteca");
         System.out.println("10. Cadastrar administrador");
         System.out.println("11. Administrador: redefinir senha de um usuario");
-        System.out.println("12. Sair");
+        System.out.println("12. Cadastrar disciplina");
+        System.out.println("13. Indicar eBook a uma disciplina");
+        System.out.println("14. Sair");
         System.out.print("Escolha uma opcao: ");
     }
 
