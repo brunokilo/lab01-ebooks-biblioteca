@@ -40,6 +40,10 @@ public class App {
         System.out.print("Escolha uma opcao: ");
     }
 
+    /*
+    Nota de transparência sobre uso de IA: Não estava conseguindo fazer com que a função abaixo carregarDados() fizesse a leitura 
+    dos dados em .csv. Então pedi para que a ferramenta Claude da Anthropic fizesse a leitura de alguns dados.
+    */
     private static void carregarDados() {
         try {
             todosEbooks.addAll(ebookRepositorio.carregar());
@@ -151,13 +155,13 @@ public class App {
     private static String escolherFormato() {
         while (true) {
             System.out.println("Formato do eBook:");
-            System.out.println("1 - Digital");
-            System.out.println("2 - Fisico");
+            System.out.println("1 - PDF");
+            System.out.println("2 - Epub");
             System.out.print("Escolha uma opcao: ");
             String opcao = leitor.nextLine();
 
-            if (opcao.equals("1")) return "Digital";
-            if (opcao.equals("2")) return "Fisico";
+            if (opcao.equals("1")) return "PDF";
+            if (opcao.equals("2")) return "Epub";
             System.out.println("Opcao invalida, tente novamente.");
         }
     }
@@ -261,8 +265,8 @@ public class App {
 
         List<Aluno> alunosComEbook = bibliotecarioPadrao.consultarAlunosComEBook(todosAlunos, ebook);
         System.out.println("Alunos com este eBook na estante (" + alunosComEbook.size() + "):");
-        for (Aluno a : alunosComEbook) {
-            System.out.println("- " + a.getNome());
+        for (Aluno aluno : alunosComEbook) {
+            System.out.println("- " + aluno.getNome());
         }
     }
 
@@ -280,7 +284,7 @@ public class App {
     }
 
     private static void cadastrarEquipeBiblioteca() {
-        System.out.print("Nome do integrante da equipe: ");
+        System.out.print("Nome do integrante da biblioteca ");
         String nome = leitor.nextLine();
         System.out.print("Senha: ");
         String senha = leitor.nextLine();
@@ -342,8 +346,6 @@ public class App {
         administrador.redefinirSenha(usuarioAlvo, novaSenha);
         System.out.println("Senha de " + usuarioAlvo.getNome() + " redefinida com sucesso.");
     }
-
-    // ---------- utilitarios ----------
 
     private static Categoria escolherOuCriarCategoria() {
         if (!todasCategorias.isEmpty()) {
