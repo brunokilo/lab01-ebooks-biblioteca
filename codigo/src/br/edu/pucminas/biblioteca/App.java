@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import br.edu.pucminas.biblioteca.persistencia.EbookRepositorioArquivo;
 import br.edu.pucminas.biblioteca.persistencia.UsuarioRepositorioArquivo;
 import br.edu.pucminas.biblioteca.persistencia.EstanteRepositorioArquivo;
@@ -18,6 +20,7 @@ public class App {
     private static final EbookRepositorioArquivo ebookRepositorio = new EbookRepositorioArquivo();
     private static final UsuarioRepositorioArquivo usuarioRepositorio = new UsuarioRepositorioArquivo();
     private static final EstanteRepositorioArquivo estanteRepositorio = new EstanteRepositorioArquivo();
+    private static final DateTimeFormatter FORMATO_DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private static final List<Aluno> todosAlunos = new LinkedList<>();
     private static final List<Categoria> todasCategorias = new LinkedList<>();
@@ -46,11 +49,11 @@ public class App {
         System.out.print("Escolha uma opcao: ");
     }
 
+    private static void carregarDados() {
     /*
     Nota de transparência sobre uso de IA: Não estava conseguindo fazer com que a função abaixo carregarDados() fizesse a leitura 
     dos dados em .csv. Então pedi para que a ferramenta Claude da Anthropic fizesse a função da leitura de alguns dados.
     */
-    private static void carregarDados() {
         try {
             todosEbooks.addAll(ebookRepositorio.carregar());
 
@@ -121,7 +124,9 @@ public class App {
                     case 9 -> cadastrarEquipeBiblioteca();
                     case 10 -> cadastrarAdministrador();
                     case 11 -> redefinirSenhaDeUsuario();
-                    case 12 -> continuar = false;
+                    case 12 -> cadastrarDisciplina();
+                    case 13 -> indicarEbookADisciplina();
+                    case 14 -> continuar = false;
                     default -> System.out.println("Opcao invalida.");
                 }
             } catch (IllegalArgumentException | IllegalStateException e) {
@@ -323,6 +328,55 @@ public class App {
         System.out.println("Administrador cadastrado: " + administrador.getNome());
     }
 
+    private static void cadastrarDisciplina() {
+        System.out.print("Nome da disciplina: ");
+        String nome = leitor.nextLine();
+        System.out.print("Periodo (numero, ex: 1): ");
+        int periodo = Integer.parseInt(leitor.nextLine());
+        System.out.print("Data de inicio (DD/MM/AAAA): ");
+        LocalDate inicio = LocalDate.parse(leitor.nextLine(), FORMATO_DATA);
+        System.out.print("Data de fim (DD//MM/AAAA): ");
+        LocalDate fim = LocalDate.parse(leitor.nextLine(), FORMATO_DATA);
+
+        Disciplina disciplina = equipe.cadastrarDisciplina(new Disciplina(periodo, inicio, fim, nome));
+        todasDisciplinas.add(disciplina);
+        System.out.println("Disciplina cadastrada: " + disciplina);
+    }
+
+    private static Disciplina escolherDisciplina() {
+    System.out.println("Disciplinas disponiveis:");
+    for (int i = 0; i < todasDisciplinas.size(); i++) {
+        System.out.println(i + " - " + todasDisciplinas.get(i));
+    }
+    System.out.print("Escolha o indice da disciplina: ");
+    int indice = Integer.parseInt(leitor.nextLine());
+    if (indice < 0 || indice >= todasDisciplinas.size()) {
+        System.out.println("Indice invalido.");
+        return null;
+    }
+    return todasDisciplinas.get(indice);
+}
+
+    private static void indicarEbookADisciplina() {
+    if (todasDisciplinas.isEmpty()) {
+        System.out.println("Cadastre uma disciplina primeiro (opcao 12).");
+        return;
+    }
+    if (todosEbooks.isEmpty()) {
+        System.out.println("Cadastre um eBook primeiro (opcao 2).");
+        return;
+    }
+
+    Disciplina disciplina = escolherDisciplina();
+    if (disciplina == null) return;
+
+    Ebook ebook = escolherEbookDaLista(todosEbooks);
+    if (ebook == null) return;
+
+    disciplina.indicarEBooK(ebook);
+    System.out.println("eBook \"" + ebook.getTitulo() + "\" indicado a disciplina \"" + disciplina + "\"");
+}
+    
     private static void redefinirSenhaDeUsuario() {
         if (todosAdministradores.isEmpty()) {
             System.out.println("Cadastre um administrador primeiro (opcao 10).");
