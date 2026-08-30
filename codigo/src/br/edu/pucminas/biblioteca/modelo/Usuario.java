@@ -31,7 +31,7 @@ public class Usuario {
         this.senha = senha;
     }
 
-    protected boolean autenticar(String senhaDigitadaPeloUsuario) {
+    public boolean autenticar(String senhaDigitadaPeloUsuario) {
         return this.senha != null && this.senha.equals(senhaDigitadaPeloUsuario);
     }
 }
