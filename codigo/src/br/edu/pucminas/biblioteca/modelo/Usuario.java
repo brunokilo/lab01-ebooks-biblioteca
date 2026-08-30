@@ -24,6 +24,10 @@ public class Usuario {
         return nome;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
     protected void editar(String nome, String senha) {
         if (nome == null || nome.isBlank())
             throw new IllegalArgumentException("Nome não pode ser vazio");

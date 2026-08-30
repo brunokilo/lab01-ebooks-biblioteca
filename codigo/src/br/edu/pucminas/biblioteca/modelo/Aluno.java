@@ -16,6 +16,10 @@ public class Aluno extends Usuario {
         init(matricula);
     }
 
+    public String getMatricula() {
+        return matricula;
+    }
+
     public void editar(String nome, String senha, String matricula){
         super.editar(nome, senha);
         init(matricula);

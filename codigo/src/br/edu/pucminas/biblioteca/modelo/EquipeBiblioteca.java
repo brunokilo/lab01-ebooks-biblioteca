@@ -98,4 +98,8 @@ public class EquipeBiblioteca extends Usuario {
             throw new NoSuchElementException("Categoria não encontrada ou já removida");
         return categoria;
     }
+
+    public String getRegistroFuncional() {
+        return registroFuncional;
+    }
 }

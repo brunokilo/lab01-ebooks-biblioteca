@@ -57,6 +57,10 @@ public class Ebook {
         return formato;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
     @Override
     public String toString(){
         return "Titulo: " + getTitulo() + "| Obrigatoriedade: " + obrigatorio;

@@ -22,6 +22,10 @@ public class Bibliotecario extends Usuario {
         init(registroFuncional);
     }
 
+    public String getRegistroFuncional() {
+        return registroFuncional;
+    }
+
     public List<Aluno> consultarAlunosComEBook(List<Aluno> alunos, Ebook ebook){
         List<Aluno> alunosComEbbok = new LinkedList<>();
         for (Aluno aluno : alunos) {
