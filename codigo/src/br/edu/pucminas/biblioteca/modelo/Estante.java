@@ -72,4 +72,8 @@ public class Estante {
         }
         return false;
     }
+
+    public void carregarSemValidacao(Ebook ebook) {
+        eBooks.add(ebook);
+    }
 }

@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.io.IOException;
 import br.edu.pucminas.biblioteca.persistencia.EbookRepositorioArquivo;
 import br.edu.pucminas.biblioteca.persistencia.UsuarioRepositorioArquivo;
+import br.edu.pucminas.biblioteca.persistencia.EstanteRepositorioArquivo;
 
 public class App {
 
@@ -15,6 +16,7 @@ public class App {
     private static final Bibliotecario bibliotecarioPadrao = new Bibliotecario("Bibliotecario teste", "teste", "teste");
     private static final EbookRepositorioArquivo ebookRepositorio = new EbookRepositorioArquivo();
     private static final UsuarioRepositorioArquivo usuarioRepositorio = new UsuarioRepositorioArquivo();
+    private static final EstanteRepositorioArquivo estanteRepositorio = new EstanteRepositorioArquivo();
 
     private static final List<Aluno> todosAlunos = new LinkedList<>();
     private static final List<Categoria> todasCategorias = new LinkedList<>();
@@ -42,7 +44,7 @@ public class App {
 
     /*
     Nota de transparência sobre uso de IA: Não estava conseguindo fazer com que a função abaixo carregarDados() fizesse a leitura 
-    dos dados em .csv. Então pedi para que a ferramenta Claude da Anthropic fizesse a leitura de alguns dados.
+    dos dados em .csv. Então pedi para que a ferramenta Claude da Anthropic fizesse a função da leitura de alguns dados.
     */
     private static void carregarDados() {
         try {
@@ -53,6 +55,7 @@ public class App {
             todosBibliotecarios.addAll(carregados.bibliotecarios);
             todasEquipes.addAll(carregados.equipes);
             todosAdministradores.addAll(carregados.administradores);
+            estanteRepositorio.carregar(todosAlunos, todosEbooks);
 
             System.out.println("Dados carregados: " + todosEbooks.size() + " eBook(s), "
                 + todosAlunos.size() + " aluno(s), " + todosBibliotecarios.size() + " bibliotecario(s), "
@@ -75,6 +78,14 @@ public class App {
             usuarioRepositorio.salvar(todosAlunos, todosBibliotecarios, todasEquipes, todosAdministradores);
         } catch (IOException e) {
             System.out.println("Nao foi possivel salvar os usuarios: " + e.getMessage());
+        }
+    }
+
+    private static void salvarEstantes() {
+        try {
+            estanteRepositorio.salvar(todosAlunos);
+        } catch (IOException e) {
+            System.out.println("Nao foi possivel salvar as estantes: " + e.getMessage());
         }
     }
 
@@ -207,6 +218,7 @@ public class App {
         System.out.println("eBook \"" + ebook.getTitulo() + "\" reservado para " + aluno.getNome()
             + " (acessos ativos na licenca: " + ebook.getLicenca().getAcessosAtivos() + "/60)");
         salvarEbooks();
+        salvarEstantes();
     }
 
     private static void cadastrarAluno() {
