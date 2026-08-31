@@ -1,0 +1,5 @@
+## Semana 3
+
+Contribuções: Junto com a minha dupla construimos o app. Fiquei responsável pelas classes EquipeBiblioteca, Usuário, Administrador e Categoria e os dados de persistencia fiquei responsável por Ebook, Estante e Usuario. 
+
+Decisões: Optei por criar um método reflection na classe administrador para que a função redefinirSenha() pudesse alterar a senha que é um atributo privado de outros usuários. Eu sabia que isso era possível ser feito e pedi para o Claude me explicar e implementar a função. Sei que não é uma boa prática mas para não ter que mexer novamente nos diagramas das sprints anteriores optei por fazer dessa forma. No App.java já iniciei a criação dos objetos "teste da Bibliotecario" e "Equipe teste" para quando o programa rodar já ter um membro da equipe da biblioteca para cadastrar um aluno ou ebook.
