@@ -1,11 +1,11 @@
 package br.edu.pucminas.biblioteca;
 
 import br.edu.pucminas.biblioteca.modelo.*;
+import br.edu.pucminas.biblioteca.persistencia.CategoriaRepositorioArquivo;
 import br.edu.pucminas.biblioteca.persistencia.DisciplinaRepositorioArquivo;
 import br.edu.pucminas.biblioteca.persistencia.EbookRepositorioArquivo;
 import br.edu.pucminas.biblioteca.persistencia.EstanteRepositorioArquivo;
 import br.edu.pucminas.biblioteca.persistencia.UsuarioRepositorioArquivo;
-import br.edu.pucminas.biblioteca.persistencia.CategoriaRepositorioArquivo;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -45,11 +45,11 @@ public class App {
     private static final List<EquipeBiblioteca> todasEquipes = new LinkedList<>();
     private static final List<Administrador> todosAdministradores = new LinkedList<>();
     private static final List<Disciplina> todasDisciplinas = new LinkedList<>();
-
+    
     // #endregion
 
     // #region persistencia de dados
-
+    
     /**
      * Carrega todos os dados persistidos em arquivo (eBooks, usuarios e
      * estantes) para as listas em memoria. Deve ser chamado uma unica vez,
@@ -72,6 +72,7 @@ public class App {
             todosAdministradores.addAll(carregados.administradores);
             estanteRepositorio.carregar(todosAlunos, todosEbooks);
             todasDisciplinas.addAll(disciplinaRepositorio.carregar(todosEbooks));
+            removerEbooksComLicencaExpirada();
 
             System.out.println("Dados carregados: " + todosEbooks.size() + " eBook(s), "
                 + todosAlunos.size() + " aluno(s), " + todosBibliotecarios.size() + " bibliotecario(s), "
@@ -136,6 +137,38 @@ public class App {
         } catch (IOException e) {
             System.out.println("Nao foi possivel salvar as categorias: " + e.getMessage());
         }
+    }
+
+    /**
+     * Remove do sistema por completo os eBooks com licenca expirada: da
+     * disciplina, das estantes de todos os alunos que os possuem, e da lista
+     * geral de eBooks. Executado uma unica vez, na inicializacao do programa.
+     */
+    private static void removerEbooksComLicencaExpirada() {
+        List<Ebook> ebooksRemovidos = new LinkedList<>();
+
+        for (Disciplina disciplina : todasDisciplinas) {
+            for (Ebook ebook : disciplina.listarEBooksComLicencaExpirada()) {
+                disciplina.removerEBook(ebook);
+                ebooksRemovidos.add(ebook);
+            }
+        }
+
+        if (ebooksRemovidos.isEmpty()) return;
+
+        for (Ebook ebook : ebooksRemovidos) {
+            for (Aluno aluno : todosAlunos) {
+                if (aluno.getEstante().listar().contains(ebook)) {
+                    aluno.getEstante().remover(ebook);
+                }
+            }
+            todosEbooks.remove(ebook);
+        }
+        
+        System.out.println(ebooksRemovidos.size() + " eBook(s) removido(s) do sistema por licenca expirada.");
+        salvarDisciplinas();
+        salvarEbooks();
+        salvarEstantes();
     }
 
     // #endregion

@@ -47,10 +47,29 @@ public class Disciplina {
         eBooks.add(eBook);
     }
 
-    public void removerEbookPorLicencaExpirada(){
-        eBooks.removeIf(ebook ->
-            fimPeriodo.isBefore(LocalDate.now()) && ebook.getLicenca().acessosAtivosMenorQueMinimoPermitido()
-        );
+    /**
+     * Identifica os eBooks desta disciplina cuja licenca esta expirada
+     * (periodo da disciplina encerrado e acessos ativos abaixo do minimo
+     * permitido), sem remove-los.
+     *
+     * @return lista de eBooks com licenca expirada nesta disciplina
+     */
+    public List<Ebook> listarEBooksComLicencaExpirada(){
+        List<Ebook> expirados = new LinkedList<>();
+        for (Ebook ebook : eBooks) {
+            if (fimPeriodo.isBefore(LocalDate.now()) && ebook.getLicenca().acessosAtivosMenorQueMinimoPermitido()) {
+                expirados.add(ebook);
+            }
+        }
+        return expirados;
+    }
+
+    /**
+     * Remove um eBook especifico da lista de eBooks indicados a esta
+     * disciplina.
+     */
+    public void removerEBook(Ebook ebook){
+        eBooks.remove(ebook);
     }
     
     public List<Ebook> listar(){
