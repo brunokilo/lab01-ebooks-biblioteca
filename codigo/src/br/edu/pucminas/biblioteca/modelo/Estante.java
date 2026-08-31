@@ -19,6 +19,8 @@ public class Estante {
     public void adicionar(Ebook ebook){
         if (!ebook.getLicenca().temVagaDisponivel(ebook))
             throw new IllegalStateException("Licença expirada ou sem vagas disponíveis");
+        if (temEbook(ebook))
+            throw new IllegalStateException("EBook já existe na estante");
 
         boolean temEspacoNaEstante = ebook.isObrigatorio() 
             ? contarEBooksObrigatorios() < maxQtdObrigatorio 
