@@ -5,6 +5,7 @@ import br.edu.pucminas.biblioteca.persistencia.DisciplinaRepositorioArquivo;
 import br.edu.pucminas.biblioteca.persistencia.EbookRepositorioArquivo;
 import br.edu.pucminas.biblioteca.persistencia.EstanteRepositorioArquivo;
 import br.edu.pucminas.biblioteca.persistencia.UsuarioRepositorioArquivo;
+import br.edu.pucminas.biblioteca.persistencia.CategoriaRepositorioArquivo;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -34,6 +35,7 @@ public class App {
     private static final UsuarioRepositorioArquivo usuarioRepositorio = new UsuarioRepositorioArquivo();
     private static final EstanteRepositorioArquivo estanteRepositorio = new EstanteRepositorioArquivo();
     private static final DisciplinaRepositorioArquivo disciplinaRepositorio = new DisciplinaRepositorioArquivo();
+    private static final CategoriaRepositorioArquivo categoriaRepositorio = new CategoriaRepositorioArquivo();
     private static final DateTimeFormatter FORMATO_DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private static final List<Aluno> todosAlunos = new LinkedList<>();
@@ -60,7 +62,8 @@ public class App {
      */
     private static void carregarDados() {
         try {
-            todosEbooks.addAll(ebookRepositorio.carregar());
+            todasCategorias.addAll(categoriaRepositorio.carregar());
+            todosEbooks.addAll(ebookRepositorio.carregar(todasCategorias));
 
             UsuarioRepositorioArquivo.UsuariosCarregados carregados = usuarioRepositorio.carregar();
             todosAlunos.addAll(carregados.alunos);
@@ -121,6 +124,17 @@ public class App {
             disciplinaRepositorio.salvar(todasDisciplinas);
         } catch (IOException e) {
             System.out.println("Nao foi possivel salvar as disciplinas: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Persiste a lista atual de categorias em arquivo.
+     */
+    private static void salvarCategorias() {
+        try {
+            categoriaRepositorio.salvar(todasCategorias);
+        } catch (IOException e) {
+            System.out.println("Nao foi possivel salvar as categorias: " + e.getMessage());
         }
     }
 
@@ -228,6 +242,7 @@ public class App {
         Categoria categoria = equipe.cadastrarCategoria(new Categoria(descricao));
         todasCategorias.add(categoria);
         System.out.println("Categoria cadastrada: " + categoria.getDescricao());
+        salvarCategorias();
     }
 
     /**
@@ -236,14 +251,19 @@ public class App {
      */
     private static void cadastrarEbook() {
         if (todasDisciplinas.isEmpty()) {
-            System.out.println("Cadastre um disciplina primeiro (opcao 7).");
+            System.out.println("Cadastre uma disciplina primeiro (opcao 7).");
+            return;
+        }
+
+        if (todasCategorias.isEmpty()) {
+            System.out.println("Cadastre uma categoria primeiro (opcao 1).");
             return;
         }
 
         Disciplina disciplina = escolherDisciplina();
         if (disciplina == null) return;
 
-        Categoria categoria = escolherOuCriarCategoria();
+        Categoria categoria = escolherCategoria();
         if (categoria == null) return;
 
         System.out.print("Titulo do eBook: ");
@@ -388,7 +408,7 @@ public class App {
             return;
         }
         if (todasDisciplinas.isEmpty()) {
-            System.out.println("Cadastre um disciplina primeiro (opcao 7).");
+            System.out.println("Cadastre uma disciplina primeiro (opcao 7).");
             return;
         }
 
@@ -585,48 +605,6 @@ public class App {
     }
 
     /**
-     * Exibe as categorias ja cadastradas para escolha, ou permite criar uma
-     * nova categoria caso nenhuma exista ainda.
-     *
-     * @return a categoria escolhida ou recem-criada, ou null se a escolha
-     *         for invalida
-     */
-    private static Categoria escolherOuCriarCategoria() {
-        if (!todasCategorias.isEmpty()) {
-            System.out.println("0 - Criar nova categoria");
-            for (int i = 0; i < todasCategorias.size(); i++) {
-                System.out.println((i + 1) + " - " + todasCategorias.get(i).getDescricao());
-            }
-            System.out.print("Escolha uma opcao: ");
-            int indice = Integer.parseInt(leitor.nextLine());
-
-            if (indice == 0) {
-                return criarCategoria();
-            }
-            if (indice >= 1 && indice <= todasCategorias.size()) {
-                return todasCategorias.get(indice - 1);
-            }
-            System.out.println("Indice invalido.");
-            return null;
-        }
-        System.out.println("Nenhuma categoria cadastrada ainda, vamos criar uma nova.");
-        return criarCategoria();
-    }
-
-    /**
-     * Le a descricao de uma nova categoria pelo teclado e a cadastra.
-     *
-     * @return a categoria recem-criada
-     */
-    private static Categoria criarCategoria() {
-        System.out.print("Descricao da nova categoria: ");
-        String descricao = leitor.nextLine();
-        Categoria categoria = equipe.cadastrarCategoria(new Categoria(descricao));
-        todasCategorias.add(categoria);
-        return categoria;
-    }
-
-    /**
      * Exibe as disciplinas cadastradas para escolha pelo indice.
      *
      * @return a disciplina escolhida, ou null se o indice informado for
@@ -708,6 +686,26 @@ public class App {
             return null;
         }
         return todosAdministradores.get(indice);
+    }
+
+    /**
+     * Exibe as categorias cadastradas para escolha pelo indice.
+     *
+     * @return a categoria escolhida, ou null se o indice informado for
+     *         invalido
+     */
+    private static Categoria escolherCategoria() {
+        System.out.println("Categorias disponiveis:");
+        for (int i = 0; i < todasCategorias.size(); i++) {
+            System.out.println(i + " - " + todasCategorias.get(i).getDescricao());
+        }
+        System.out.print("Escolha o indice da categoria: ");
+        int indice = Integer.parseInt(leitor.nextLine());
+        if (indice < 0 || indice >= todasCategorias.size()) {
+            System.out.println("Indice invalido.");
+            return null;
+        }
+        return todasCategorias.get(indice);
     }
 
     // #endregion
