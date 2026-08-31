@@ -23,16 +23,15 @@ class Bibliotecario {
   -registroFuncional: String
   +cadastrarBibliotecario() : Bibliotecario
   +editar(id: String, nome: String, senha: String, registroFuncional: String) : void
-  +removerBibliotecario(bibliotecario: Bibliotecario) : Bibliotecario
   +consultarAlunosComEBook(alunos: List, ebook: EBook): List
 }
 
 class Equipe_Biblioteca{
   -registroFuncional: String
-  +removerAluno(aluno: Aluno) : Aluno
-  +removerDisciplina(disciplina: Disciplina) : Disciplina
-  +excluirCategoria(categoria: Categoria) : Categoria
-  +excluirEBook(eBook: EBook): EBook
+  +cadastrarAluno(aluno: Aluno) : Aluno
+  +cadastrarBibliotecario(bibliotecario: Bibliotecario) : Bibliotecario
+  +cadastrarDisciplina(disciplina: Disciplina) : Disciplina
+  +cadastrarCategoria(categoria: Categoria) : Categoria
 }
 
 class Disciplina{
@@ -43,28 +42,31 @@ class Disciplina{
   -eBooks: List
   +editar(periodo: int, inicioPeriodo: LocalDate, fimPeriodo: LocalDate, nome: String) : void
   +indicarEBooK(eBook: EBook): void
-  +removerEbookPorLicencaExpirada():void
+  +listarEBooksComLicencaExpirada():void
+  +removerEBook(eBook: EBook):void
 }
 
 class Categoria{
   -descricao: String
   +cadastrarCategoria() : Categoria
-  +editarCategoria(categoria: Categoria) : Categoria
+  +editar(categoria: String) : void
 }
 
 class EBook {
   -titulo: String
   -editora: String
   -formato: String
-  -categoria: String
+  -categoria: Categoria
   -obrigatorio: boolean
-  +editarEBook(titulo: String, editora: String, formato: String, categoria: Categoria): EBook
+  -licensa: Licensa
+  +editar(titulo: String, editora: String, formato: String, categoria: Categoria): EBook
   +isObrigatorio() : boolean
-  +setObrigatorio() : boolean
+  +setObrigatorio() : void
 }
 
 class Licenca {
   -limiteAcessosSimultaneos: int
+  -minimoAcessosPorSemestre: int
   -acessosAtivos: int
   +temVagaDisponivel(ebook :EBook): boolean
   +acessosAtivosMenorQueMinimoPermitido(): boolean
@@ -73,8 +75,9 @@ class Licenca {
 }
 
 class Estante {
-  -qtdObrigatorio: Int
-  -qtdNaoObrigatorio: Int
+  -maxQtdObrigatorio: Int
+  -maxQtdNaoObrigatorio: Int
+  -eBooks: List
   +adicionar(ebook: EBook): void
   +remover(ebook: EBook): void
   +listar(): List
@@ -82,6 +85,7 @@ class Estante {
   -contarEBooksObrigatorios(): int
   -contarNaoEBooksObrigatorios(): int
   +temEbook(ebook: Ebook): boolean
+  +carregarSemValidacao(ebook: Ebook): void
 }
 
 Usuario <|-- Aluno

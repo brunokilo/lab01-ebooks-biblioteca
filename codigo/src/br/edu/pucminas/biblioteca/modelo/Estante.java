@@ -75,6 +75,13 @@ public class Estante {
         return false;
     }
 
+    /**
+     * Adiciona um eBook diretamente a estante, sem validar limites de cota
+     * ou disponibilidade de licenca, e sem incrementar o contador de acessos
+     * ativos da licenca. Uso exclusivo para reconstrucao do estado a partir
+     * de dados persistidos, onde essas validacoes ja ocorreram no momento do
+     * cadastro original.
+     */
     public void carregarSemValidacao(Ebook ebook) {
         eBooks.add(ebook);
     }
