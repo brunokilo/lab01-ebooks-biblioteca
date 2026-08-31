@@ -1,6 +1,7 @@
 package br.edu.pucminas.biblioteca;
 
 import br.edu.pucminas.biblioteca.modelo.*;
+import br.edu.pucminas.biblioteca.persistencia.DisciplinaRepositorioArquivo;
 import br.edu.pucminas.biblioteca.persistencia.EbookRepositorioArquivo;
 import br.edu.pucminas.biblioteca.persistencia.EstanteRepositorioArquivo;
 import br.edu.pucminas.biblioteca.persistencia.UsuarioRepositorioArquivo;
@@ -32,6 +33,7 @@ public class App {
     private static final EbookRepositorioArquivo ebookRepositorio = new EbookRepositorioArquivo();
     private static final UsuarioRepositorioArquivo usuarioRepositorio = new UsuarioRepositorioArquivo();
     private static final EstanteRepositorioArquivo estanteRepositorio = new EstanteRepositorioArquivo();
+    private static final DisciplinaRepositorioArquivo disciplinaRepositorio = new DisciplinaRepositorioArquivo();
     private static final DateTimeFormatter FORMATO_DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private static final List<Aluno> todosAlunos = new LinkedList<>();
@@ -66,6 +68,7 @@ public class App {
             todasEquipes.addAll(carregados.equipes);
             todosAdministradores.addAll(carregados.administradores);
             estanteRepositorio.carregar(todosAlunos, todosEbooks);
+            todasDisciplinas.addAll(disciplinaRepositorio.carregar(todosEbooks));
 
             System.out.println("Dados carregados: " + todosEbooks.size() + " eBook(s), "
                 + todosAlunos.size() + " aluno(s), " + todosBibliotecarios.size() + " bibliotecario(s), "
@@ -109,6 +112,18 @@ public class App {
         }
     }
 
+    /**
+     * Persiste a lista atual de disciplinas (e os eBooks indicados a cada
+     * uma) em arquivo.
+     */
+    private static void salvarDisciplinas() {
+        try {
+            disciplinaRepositorio.salvar(todasDisciplinas);
+        } catch (IOException e) {
+            System.out.println("Nao foi possivel salvar as disciplinas: " + e.getMessage());
+        }
+    }
+
     // #endregion
 
     // #region menu e execucao principal
@@ -127,22 +142,22 @@ public class App {
         System.out.println(" 3. Cadastrar aluno");
         System.out.println(" 4. Cadastrar bibliotecario");
         System.out.println(" 5. Cadastrar equipe da biblioteca");
-        System.out.println("6. Cadastrar administrador");
-        System.out.println("7. Cadastrar disciplina");
-        System.out.println("8. Indicar eBook a uma disciplina");
+        System.out.println(" 6. Cadastrar administrador");
+        System.out.println(" 7. Cadastrar disciplina");
+        System.out.println(" 8. Indicar eBook a uma disciplina");
 
         System.out.println("\n--- Menu Aluno: ---");
         System.out.println(" 9. Reservar eBook para um aluno");
         System.out.println(" 10. Listar estante de um aluno (nome e livros)");
 
         System.out.println("\n--- Menu Administrador: ---");
-        System.out.println("11. Administrador: redefinir senha de um usuario");
+        System.out.println(" 11. Administrador: redefinir senha de um usuario");
 
         System.out.println("\n--- Menu Bibliotecario: ---");
         System.out.println(" 12. Consultar aluno (nome e quantidade de livros)");
         System.out.println(" 13. Consultar alunos que possuem um eBook");
 
-        System.out.println("\n14. Sair");
+        System.out.println("\n 14. Sair");
         System.out.print("Escolha uma opcao: ");
     }
 
@@ -244,6 +259,7 @@ public class App {
         disciplina.indicarEBooK(ebook);
         System.out.println("eBook cadastrado: " + ebook.getTitulo() + " (categoria: " + categoria.getDescricao() + ")");
         salvarEbooks();
+        salvarDisciplinas();
     }
 
     /**
@@ -329,6 +345,7 @@ public class App {
         Disciplina disciplina = equipe.cadastrarDisciplina(new Disciplina(periodo, inicio, fim, nome));
         todasDisciplinas.add(disciplina);
         System.out.println("Disciplina cadastrada: " + disciplina);
+        salvarDisciplinas();
     }
 
     /**
@@ -337,7 +354,7 @@ public class App {
      */
     private static void indicarEbookADisciplina() {
         if (todasDisciplinas.isEmpty()) {
-            System.out.println("Cadastre uma disciplina primeiro (opcao 12).");
+            System.out.println("Cadastre uma disciplina primeiro (opcao 7).");
             return;
         }
         if (todosEbooks.isEmpty()) {
@@ -353,6 +370,7 @@ public class App {
 
         disciplina.indicarEBooK(ebook);
         System.out.println("eBook \"" + ebook.getTitulo() + "\" indicado a disciplina \"" + disciplina + "\"");
+        salvarDisciplinas();
     }
 
     // #endregion
@@ -366,7 +384,7 @@ public class App {
      */
     private static void reservarEbookParaAluno() {
         if (todosAlunos.isEmpty()) {
-            System.out.println("Cadastre um aluno primeiro (opcao 4).");
+            System.out.println("Cadastre um aluno primeiro (opcao 3).");
             return;
         }
         if (todasDisciplinas.isEmpty()) {
@@ -432,7 +450,7 @@ public class App {
      */
     private static void redefinirSenhaDeUsuario() {
         if (todosAdministradores.isEmpty()) {
-            System.out.println("Cadastre um administrador primeiro (opcao 10).");
+            System.out.println("Cadastre um administrador primeiro (opcao 6).");
             return;
         }
 

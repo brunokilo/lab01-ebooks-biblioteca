@@ -13,7 +13,7 @@ public class Disciplina {
     private LocalDate fimPeriodo;
     private String nome;
     private final List<Ebook> eBooks;
-
+    
     private void init(int periodo, LocalDate inicioPeriodo, LocalDate fimPeriodo, String nome){
         if (fimPeriodo.isBefore(inicioPeriodo))
             throw new IllegalArgumentException("Data de fim não pode ser anterior à data de início");
@@ -23,7 +23,6 @@ public class Disciplina {
             throw new IllegalArgumentException("Nome da disciplina não pode ser vazio");
         if (inicioPeriodo == null || fimPeriodo == null)
             throw new IllegalArgumentException("Datas de início e fim são obrigatórias");
-
         
         this.periodo = periodo;
         this.inicioPeriodo = inicioPeriodo;
@@ -35,11 +34,11 @@ public class Disciplina {
         init(periodo, inicioPeriodo, fimPeriodo, nome);
         this.eBooks = new LinkedList<>();
     }
-
+    
     public void editar(int periodo, LocalDate inicioPeriodo, LocalDate fimPeriodo, String nome){
         init(periodo, inicioPeriodo, fimPeriodo, nome);
     }
-
+    
     public void indicarEBooK(Ebook eBook){
         if (eBook == null) 
             throw new IllegalArgumentException("Ebook não pode ser nulo");
@@ -53,11 +52,27 @@ public class Disciplina {
             fimPeriodo.isBefore(LocalDate.now()) && ebook.getLicenca().acessosAtivosMenorQueMinimoPermitido()
         );
     }
-
+    
     public List<Ebook> listar(){
         return List.copyOf(eBooks);
     }
+    
+    public int getPeriodo() {
+        return periodo;
+    }
 
+    public LocalDate getInicioPeriodo() {
+        return inicioPeriodo;
+    }
+
+    public LocalDate getFimPeriodo() {
+        return fimPeriodo;
+    }
+    
+    public String getNome() {
+        return nome;
+    }
+    
     @Override
     public String toString(){
         return "Disciplina: " + nome;
